@@ -1,0 +1,23 @@
+
+<div class="component-header">
+  <div class="container-title"><h1>Boeken</h1></div>
+  <div>
+    <button mat-raised-button color="primary">Boek toevoegen</button>
+  </div>
+</div>
+<mat-table [dataSource]="books">
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
+    <mat-cell *matCellDef="let book">{{ book.title }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="author">
+    <mat-header-cell *matHeaderCellDef>Auteur</mat-header-cell>
+    <mat-cell *matCellDef="let book">{{ book.author }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="publicationDate">
+    <mat-header-cell *matHeaderCellDef>Publicatiedatum</mat-header-cell>
+    <mat-cell *matCellDef="let book">{{ book.publicationDate }}</mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="['title', 'author', 'publicationDate']"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: ['title', 'author', 'publicationDate']"></mat-row>
+</mat-table>

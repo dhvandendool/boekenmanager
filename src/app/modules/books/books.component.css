@@ -1,0 +1,12 @@
+.component-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.container-title {
+  flex: 1;
+}
+
+button {
+  margin-left: 10px;
+}
