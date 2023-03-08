@@ -9,19 +9,17 @@ const reducer = createReducer(
   initialState,
   on(BookActions.GetBookAction, state => state),
   on(BookActions.CreateBookAction, (state: BookState, book: Book) => {
-    return { ...state, Books: [...state.Books, book], BookError: null };
+    return { ...state, books: [...state.books, book], bookError: null };
   }),
 
   on(BookActions.SuccessGetBookAction, (state: BookState, { payload }) => {
-    return { ...state, Books: payload, BookError: null };
+    return { ...state, books: payload, bookError: null };
   }),
   on(BookActions.SuccessCreateBookAction, (state: BookState, { payload }) => {
-    return { ...state, Books: [...state.Books, payload], BookError: null };
+    return { ...state, books: [...state.books, payload], bookError: null };
   }),
   on(BookActions.ErrorBookAction, (state: BookState, error: Error) => {
-    // remove below line and use different telemetry logging
-    console.error(error);
-    return { ...state, BookError: error };
+    return { ...state, bookError: error };
   })
 );
 

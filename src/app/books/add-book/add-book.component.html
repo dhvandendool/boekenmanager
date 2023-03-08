@@ -2,7 +2,7 @@
   <div class="component-title"><h1>Boeken</h1></div>
 </div>
 
-<form [formGroup]="addBookForm">
+<form [formGroup]="addBookForm" (click)="onSubmit($event)">
   <mat-card>
     <mat-card-content>
       <mat-form-field appearance="standard">
@@ -45,7 +45,7 @@
   </mat-card>
   <br/>
   <div class="bottom-buttons">
-    <button mat-raised-button color="primary" (click)="goBack()">Terug</button>
-    <button mat-raised-button color="primary" (click)="onSubmit()">Opslaan</button>
+    <button mat-raised-button color="primary" type="button" (click)="goBack()">Terug</button>
+    <button mat-raised-button color="primary"  type="submit">Opslaan</button>
   </div>
 </form>

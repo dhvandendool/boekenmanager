@@ -22,8 +22,8 @@ export class BooksComponent implements OnInit {
     this.isLoading = true;
     this.booksState.subscribe(booksState => {
       this.isLoading = false;
-      this.booksError = booksState.BookError
-      this.books = booksState.Books;
+      this.booksError = booksState.bookError
+      this.books = booksState.books;
     });
   }
 
