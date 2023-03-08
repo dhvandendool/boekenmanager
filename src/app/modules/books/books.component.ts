@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BooksService} from "../../services/books.service";
+import {Book} from "../../models/book.model";
 
 @Component({
   selector: 'books',
@@ -6,17 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-  books = [
-    { title: 'Book 1', author: 'Author 1', publicationDate: '2022-01-01' },
-    { title: 'Book 2', author: 'Author 2', publicationDate: '2022-02-01' },
-    { title: 'Book 3', author: 'Author 3', publicationDate: '2022-03-01' },
-    { title: 'Book 4', author: 'Author 4', publicationDate: '2022-04-01' },
-    { title: 'Book 5', author: 'Author 5', publicationDate: '2022-05-01' },
-  ];
+  isLoading = false;
+  books = new Array<Book>();
 
-  constructor() { }
+  constructor(private booksService: BooksService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    this.booksService.getAll().subscribe(books => {
+      this.books = books;
+      this.isLoading = false;
+    })
   }
 
 }

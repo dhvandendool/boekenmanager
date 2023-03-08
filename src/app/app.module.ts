@@ -9,6 +9,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {BooksModule} from "./modules/books/books.module";
 import {MatNativeDateModule} from "@angular/material/core";
 import {AppRoutingModule} from "./app-routing.module";
+import {BooksService} from "./services/books.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import {AppRoutingModule} from "./app-routing.module";
     MatTableModule,
     MatToolbarModule,
     BooksModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [BooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

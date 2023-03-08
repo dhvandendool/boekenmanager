@@ -20,3 +20,6 @@
   <mat-header-row *matHeaderRowDef="['title', 'author', 'publicationDate']"></mat-header-row>
   <mat-row *matRowDef="let row; columns: ['title', 'author', 'publicationDate']"></mat-row>
 </mat-table>
+<div *ngIf="isLoading" class="loading-div">
+  <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+</div>

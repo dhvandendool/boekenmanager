@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {RouterLink} from "@angular/router";
 import {CommonModule} from "@angular/common";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {CommonModule} from "@angular/common";
     ReactiveFormsModule,
     MatInputModule,
     CommonModule,
-    RouterLink
+    RouterLink,
+    MatProgressSpinnerModule
   ],
   declarations: [BooksComponent, AddBookComponent]
 })
