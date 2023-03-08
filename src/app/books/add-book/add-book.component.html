@@ -25,7 +25,8 @@
       </mat-form-field>&nbsp;
       <mat-form-field>
         <mat-label>Publicatiedatum</mat-label>
-        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Publicatiedatum" formControlName="publicatiedatum">
+        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Publicatiedatum"
+               formControlName="publicatiedatum">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="addBookForm.get('publicatiedatum')?.hasError('matDatepickerParse')">

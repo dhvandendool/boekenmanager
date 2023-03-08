@@ -5,20 +5,20 @@
   </div>
 </div>
 <mat-table [dataSource]="books">
-  <ng-container matColumnDef="title">
+  <ng-container matColumnDef="titel">
     <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
-    <mat-cell *matCellDef="let book">{{ book.title }}</mat-cell>
+    <mat-cell *matCellDef="let book">{{ book.titel }}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="author">
+  <ng-container matColumnDef="auteur">
     <mat-header-cell *matHeaderCellDef>Auteur</mat-header-cell>
-    <mat-cell *matCellDef="let book">{{ book.author }}</mat-cell>
+    <mat-cell *matCellDef="let book">{{ book.auteur }}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="publicationDate">
+  <ng-container matColumnDef="publicatiedatum">
     <mat-header-cell *matHeaderCellDef>Publicatiedatum</mat-header-cell>
-    <mat-cell *matCellDef="let book">{{ book.publicationDate }}</mat-cell>
+    <mat-cell *matCellDef="let book">{{ book.publicatiedatum }}</mat-cell>
   </ng-container>
-  <mat-header-row *matHeaderRowDef="['title', 'author', 'publicationDate']"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: ['title', 'author', 'publicationDate']"></mat-row>
+  <mat-header-row *matHeaderRowDef="['titel', 'auteur', 'publicatiedatum']"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: ['titel', 'auteur', 'publicatiedatum']"></mat-row>
 </mat-table>
 <div *ngIf="isLoading" class="loading-div">
   <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>

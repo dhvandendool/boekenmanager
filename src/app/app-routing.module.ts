@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {BooksComponent} from "./modules/books/books.component";
-import {AddBookComponent} from "./modules/books/add-book/add-book.component";
+import {BooksComponent} from "./books/list-book/books.component";
+import {AddBookComponent} from "./books/add-book/add-book.component";
 
 const routes: Routes = [
   { path: 'books', component: BooksComponent },
