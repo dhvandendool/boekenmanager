@@ -7,8 +7,8 @@ import {MatTableModule} from "@angular/material/table";
 import {RouterOutlet} from "@angular/router";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {BooksModule} from "./modules/books/books.module";
-import { AppRoutingModule } from './app-routing.module';
 import {MatNativeDateModule} from "@angular/material/core";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
