@@ -1,31 +1,36 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import * as BookActions from './book.action';
-import { Book } from './book.model';
-import { BookState, initializeState } from './book.state';
+import { createFeature, createReducer, on } from '@ngrx/store';
+import { BooksState } from './book.state';
+import { BookActions } from './book.actions';
 
-const initialState = initializeState();
+export const initialState: BooksState = {
+  books: [],
+  loading: false,
+};
 
-const reducer = createReducer(
-  initialState,
-  on(BookActions.GetBookAction, state => state),
-  on(BookActions.CreateBookAction, (state: BookState, book: Book) => {
-    return { ...state, books: [...state.books, book], bookError: null };
-  }),
+export const booksFeature = createFeature({
+  name: 'books',
+  reducer: createReducer(
+    initialState,
+    on(BookActions.beginGetAll, (state) => ({
+      ...state,
+      loading: true,
+    })),
+    on(BookActions.successGetAll, (state, { books }) => ({
+      ...state,
+      books,
+      loading: false,
+    })),
+    on(BookActions.beginAddBook, (state, { book }) => ({
+      ...state,
+      book,
+      loading: true
+    })),
+    on(BookActions.sucessAddBook, (state, {book }) => ({
+      ...state,
+      books: [...state.books, book],
+      loading: false
+    }))
+  )
+});
 
-  on(BookActions.SuccessGetBookAction, (state: BookState, { payload }) => {
-    return { ...state, books: payload, bookError: null };
-  }),
-  on(BookActions.SuccessCreateBookAction, (state: BookState, { payload }) => {
-    return { ...state, books: [...state.books, payload], bookError: null };
-  }),
-  on(BookActions.ErrorBookAction, (state: BookState, error: Error) => {
-    return { ...state, bookError: error };
-  })
-);
-
-export function BookReducer(
-  state: BookState | undefined,
-  action: Action
-): BookState {
-  return reducer(state, action);
-}
+export const { name } = booksFeature;

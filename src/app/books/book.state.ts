@@ -1,10 +1,6 @@
 import { Book } from './book.model';
 
-export interface BookState {
-  books: Array<Book>;
-  bookError: Error | null;
+export interface BooksState {
+  books: Book[];
+  loading: boolean;
 }
-
-export const initializeState = (): BookState => {
-  return { books: Array<Book>(), bookError: null };
-};

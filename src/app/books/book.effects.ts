@@ -3,9 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import * as BookActions from './book.action';
 import { BooksService } from './books.service';
 import { Book } from './book.model';
+import { BookActions } from './book.actions';
 
 @Injectable()
 export class BookEffects {
@@ -13,14 +13,14 @@ export class BookEffects {
 
   GetBooks$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
-      ofType(BookActions.BeginGetBookAction),
+      ofType(BookActions.beginGetAll),
       mergeMap(() =>
         this.bookService.getAll().pipe(
           map((data: Book[]) => {
-            return BookActions.SuccessGetBookAction({ payload: data });
+            return BookActions.successGetAll({ books: data });
           }),
           catchError((error: Error) => {
-            return of(BookActions.ErrorBookAction(error));
+            return of(BookActions.errorBook(error));
           })
         )
       )
@@ -29,14 +29,14 @@ export class BookEffects {
 
   CreateBooks$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
-      ofType(BookActions.BeginCreateBookAction),
+      ofType(BookActions.beginAddBook),
       mergeMap(action =>
-        this.bookService.add(action.payload).pipe(
+        this.bookService.add(action.book).pipe(
           map((data: Book) => {
-            return BookActions.SuccessCreateBookAction({ payload: data });
+            return BookActions.sucessAddBook({ book: data });
           }),
           catchError((error: Error) => {
-            return of(BookActions.ErrorBookAction(error));
+            return of(BookActions.errorBook(error));
           })
         )
       )

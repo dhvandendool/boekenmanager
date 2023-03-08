@@ -2,12 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { BookState } from '../book.state';
 import { Book } from '../book.model';
-import { BeginCreateBookAction, SuccessCreateBookAction } from '../book.action';
 import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
-import { first, Subscription } from 'rxjs';
+import { first } from 'rxjs';
+import { BookActions } from '../book.actions';
+import { BooksState } from '../book.state';
 
 @Component({
   selector: 'add-book',
@@ -20,7 +20,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
   addBookForm!: FormGroup;
 
   private dutchLocale = 'nl-NL';
-  private createBookSuccessActionSubscription = this.actions$.pipe(ofType(SuccessCreateBookAction), first())
+  private createBookSuccessActionSubscription = this.actions$.pipe(ofType(BookActions.sucessAddBook), first())
     .subscribe(() => {
       return this.router.navigate(['../']);
     });
@@ -28,7 +28,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private location: Location,
               private router: Router,
-              private store: Store<{ books: BookState }>,
+              private store: Store<{ books: BooksState }>,
               private actions$: Actions) {
     const currentDate = new Date();
     this.minDate = new Date(1500, 1, 1);
@@ -58,7 +58,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
       auteur: this.addBookForm.value['auteur'],
       publicatiedatum: (this.addBookForm.value['publicatiedatum'] as Date).toLocaleDateString(this.dutchLocale)
     };
-    this.store.dispatch(BeginCreateBookAction({payload: book}));
+    this.store.dispatch(BookActions.beginAddBook({book: book}));
   }
 
   goBack() {
