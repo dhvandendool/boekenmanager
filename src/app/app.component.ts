@@ -1,16 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BookActions } from './books/book.actions';
-import { BooksState } from './books/book.state';
+import { BookActions } from './modules/books/book.actions';
+import { BookState } from './modules/books/book.state';
+import { Actions, ofType } from '@ngrx/effects';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(store: Store<{ books: BooksState }>) {
+export class AppComponent implements OnDestroy {
+  private getAllBookErrorActionSubscription = this.actions$.pipe(ofType(BookActions.errorGetAll))
+    .subscribe((data) => {
+      const errorMsg = `Fout bij het ophalen van de boeken: ${data.error.message}`;
+      this.matSnackBar.open(errorMsg, undefined, { duration: 5000 });
+    });
+
+  constructor(private actions$: Actions, store: Store<{ books: BookState }>, private matSnackBar: MatSnackBar) {
     store.dispatch(BookActions.beginGetAll());
+  }
+
+  ngOnDestroy() {
+    this.getAllBookErrorActionSubscription.unsubscribe();
   }
 
   title = 'Boeken manager';

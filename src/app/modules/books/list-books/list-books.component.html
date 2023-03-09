@@ -4,6 +4,7 @@
     <button mat-raised-button color="primary" routerLink="./add">Boek toevoegen</button>
   </div>
 </div>
+<mat-error *ngIf="error">{{error}}</mat-error>
 <mat-table [dataSource]="books">
   <ng-container matColumnDef="titel">
     <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>

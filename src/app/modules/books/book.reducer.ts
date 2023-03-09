@@ -1,36 +1,41 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { BooksState } from './book.state';
+import { BookState } from './book.state';
 import { BookActions } from './book.actions';
 
-export const initialState: BooksState = {
+export const initialState: BookState = {
   books: [],
-  loading: false,
+  loading: false
 };
 
-export const booksFeature = createFeature({
+export const bookFeature = createFeature({
   name: 'books',
   reducer: createReducer(
     initialState,
     on(BookActions.beginGetAll, (state) => ({
       ...state,
-      loading: true,
+      loading: true
     })),
     on(BookActions.successGetAll, (state, { books }) => ({
       ...state,
       books,
-      loading: false,
+      loading: false
     })),
     on(BookActions.beginAddBook, (state, { book }) => ({
       ...state,
       book,
       loading: true
     })),
-    on(BookActions.sucessAddBook, (state, {book }) => ({
+    on(BookActions.successAddBook, (state, { book }) => ({
       ...state,
       books: [...state.books, book],
       loading: false
+    })),
+    on(BookActions.errorAddBook, BookActions.errorGetAll,
+      (state) => ({
+      ...state,
+      loading: false,
     }))
   )
 });
 
-export const { name } = booksFeature;
+export const { name } = bookFeature;

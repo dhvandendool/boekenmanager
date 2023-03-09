@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Book } from './book.model';
 
 @Injectable()
-export class BooksService {
+export class BookService {
   constructor(private httpClient: HttpClient) {
   }
 

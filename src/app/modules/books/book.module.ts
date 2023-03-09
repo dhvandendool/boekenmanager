@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { booksFeature } from './books.reducer';
+import { bookFeature } from './book.reducer';
 import { StoreModule } from '@ngrx/store';
 
 @NgModule({
@@ -28,9 +28,9 @@ import { StoreModule } from '@ngrx/store';
     CommonModule,
     RouterLink,
     MatProgressSpinnerModule,
-    StoreModule.forFeature(booksFeature),
+    StoreModule.forFeature(bookFeature),
   ],
   declarations: [ListBooksComponent, AddBookComponent]
 })
-export class BooksModule {
+export class BookModule {
 }

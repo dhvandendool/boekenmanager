@@ -1,8 +1,8 @@
 import { createSelector } from '@ngrx/store';
-import { booksFeature } from './books.reducer';
+import { bookFeature } from './book.reducer';
 
 export const selectBookListPageViewModel = createSelector(
-  booksFeature.selectBooks,
-  booksFeature.selectLoading,
+  bookFeature.selectBooks,
+  bookFeature.selectLoading,
   (books, loading) => ({ books, loading })
 );

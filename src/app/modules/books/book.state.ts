@@ -1,6 +1,6 @@
 import { Book } from './book.model';
 
-export interface BooksState {
+export interface BookState {
   books: Book[];
   loading: boolean;
 }

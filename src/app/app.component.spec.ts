@@ -3,7 +3,6 @@ import { AppComponent } from './app.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { BookActions } from './books/book.actions';
 
 describe('AppComponent', () => {
   let store: MockStore;
