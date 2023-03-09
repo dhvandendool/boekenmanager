@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { provideMockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { BookActions } from './books/book.actions';
 
 describe('AppComponent', () => {
+  let store: MockStore;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
@@ -18,6 +21,7 @@ describe('AppComponent', () => {
         provideMockStore({})
       ],
     }).compileComponents();
+    store = TestBed.inject(MockStore);
   });
 
   it('should create the app', () => {
@@ -31,4 +35,12 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('Boeken manager');
   });
+
+  // it('should dispatch beginGetAll action', () => {
+  //   const dispatchSpy = jest.spyOn(store,'dispatch').mock;
+  //   const fixture = TestBed.createComponent(AppComponent);
+  //   const app = fixture.componentInstance;
+  //
+  //   expect(dispatchSpy).toHaveBeenCalledWith(BookActions.beginGetAll());
+  // });
 });

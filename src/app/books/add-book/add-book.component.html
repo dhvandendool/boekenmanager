@@ -8,19 +8,19 @@
       <mat-form-field appearance="standard">
         <mat-label>Titel</mat-label>
         <input matInput placeholder="Titel" formControlName="titel">
-        <mat-error *ngIf="addBookForm.get('titel')?.hasError('maxlength')">Titel kan niet meer dan 50 karakters
+        <mat-error *ngIf="titel.hasError('maxlength')">Titel kan niet meer dan 50 karakters
           bevatten
         </mat-error>
-        <mat-error *ngIf="addBookForm.get('titel')?.hasError('required')">Dit veld is verplicht
+        <mat-error *ngIf="titel.hasError('required')">Dit veld is verplicht
         </mat-error>
       </mat-form-field>&nbsp;
       <mat-form-field>
         <mat-label>Auteur</mat-label>
         <input matInput placeholder="Auteur" formControlName="auteur">
-        <mat-error *ngIf="addBookForm.get('auteur')?.hasError('maxlength')">Auteur kan niet meer dan 50 karakters
+        <mat-error *ngIf="auteur.hasError('maxlength')">Auteur kan niet meer dan 50 karakters
           bevatten
         </mat-error>
-        <mat-error *ngIf="addBookForm.get('titel')?.hasError('required')">Dit veld is verplicht
+        <mat-error *ngIf="auteur.hasError('required')">Dit veld is verplicht
         </mat-error>
       </mat-form-field>&nbsp;
       <mat-form-field>
@@ -29,15 +29,15 @@
                formControlName="publicatiedatum">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="addBookForm.get('publicatiedatum')?.hasError('matDatepickerParse')">
+        <mat-error *ngIf="publicatiedatum.hasError('required')">Dit veld is verplicht
+        </mat-error>
+        <mat-error *ngIf="publicatiedatum.hasError('matDatepickerParse')">
           Datum moet het volgende formaat bevatten MM/DD/JJJJ
         </mat-error>
-        <mat-error *ngIf="addBookForm.get('publicatiedatum')?.hasError('required')">Dit veld is verplicht
-        </mat-error>
-        <mat-error *ngIf="addBookForm.get('publicatiedatum')?.hasError('matDatepickerMax')">
+        <mat-error *ngIf="publicatiedatum.hasError('matDatepickerMax')">
           Datum mag niet meer dan een jaar in de toekomst liggen
         </mat-error>
-        <mat-error *ngIf="addBookForm.get('publicatiedatum')?.hasError('matDatepickerMin')">
+        <mat-error *ngIf="publicatiedatum.hasError('matDatepickerMin')">
           Datum mag niet voor het jaar 1500 zijn
         </mat-error>
       </mat-form-field>

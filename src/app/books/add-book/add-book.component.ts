@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Book } from '../book.model';
@@ -17,13 +17,18 @@ import { BooksState } from '../book.state';
 export class AddBookComponent implements OnInit, OnDestroy {
   minDate: Date;
   maxDate: Date;
-  addBookForm!: FormGroup;
 
   private dutchLocale = 'nl-NL';
   private createBookSuccessActionSubscription = this.actions$.pipe(ofType(BookActions.sucessAddBook), first())
     .subscribe(() => {
       return this.router.navigate(['../']);
     });
+
+  addBookForm = this.fb.group({
+    titel: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    auteur: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    publicatiedatum: new FormControl<Date | null>(null, [Validators.required])
+  });
 
   constructor(private fb: FormBuilder,
               private location: Location,
@@ -36,11 +41,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.addBookForm = this.fb.group({
-      titel: ['', [Validators.required, Validators.maxLength(50)]],
-      auteur: ['', [Validators.required, Validators.maxLength(50)]],
-      publicatiedatum: ['', Validators.required]
-    });
+
   }
 
   ngOnDestroy() {
@@ -50,18 +51,34 @@ export class AddBookComponent implements OnInit, OnDestroy {
 
   onSubmit(event: MouseEvent) {
     event.preventDefault();
-    if (this.addBookForm.invalid) {
+    if (this.addBookForm.invalid || this.addBookForm.value.titel === null) {
       return;
     }
+
+    const formValue = this.addBookForm.value;
     const book: Book = {
-      titel: this.addBookForm.value['titel'],
-      auteur: this.addBookForm.value['auteur'],
-      publicatiedatum: (this.addBookForm.value['publicatiedatum'] as Date).toLocaleDateString(this.dutchLocale)
+      titel: formValue.titel || '',
+      auteur: formValue.auteur || '',
+      publicatiedatum: formValue.publicatiedatum ? formValue.publicatiedatum.toLocaleDateString(this.dutchLocale) : ''
     };
+
     this.store.dispatch(BookActions.beginAddBook({book: book}));
   }
 
   goBack() {
     this.location.back();
+  }
+
+  // ! is used to explicitly tell typescript compiler that controls are never null since they are created on class creation
+  get titel() {
+    return this.addBookForm.get('titel')!;
+  }
+
+  get auteur() {
+    return this.addBookForm.get('auteur')!;
+  }
+
+  get publicatiedatum() {
+    return this.addBookForm.get('publicatiedatum')!;
   }
 }
