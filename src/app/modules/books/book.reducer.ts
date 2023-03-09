@@ -15,27 +15,27 @@ export const bookFeature = createFeature({
       ...state,
       loading: true
     })),
-    on(BookActions.successGetAll, (state, { books }) => ({
+    on(BookActions.successGetAll, (state, {books}) => ({
       ...state,
       books,
       loading: false
     })),
-    on(BookActions.beginAddBook, (state, { book }) => ({
+    on(BookActions.beginAddBook, (state, {book}) => ({
       ...state,
       book,
       loading: true
     })),
-    on(BookActions.successAddBook, (state, { book }) => ({
+    on(BookActions.successAddBook, (state, {book}) => ({
       ...state,
       books: [...state.books, book],
       loading: false
     })),
     on(BookActions.errorAddBook, BookActions.errorGetAll,
       (state) => ({
-      ...state,
-      loading: false,
-    }))
+        ...state,
+        loading: false,
+      }))
   )
 });
 
-export const { name } = bookFeature;
+export const {name} = bookFeature;

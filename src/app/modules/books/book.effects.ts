@@ -9,7 +9,8 @@ import { BookActions } from './book.actions';
 
 @Injectable()
 export class BookEffects {
-  constructor(private bookService: BookService, private action$: Actions) {}
+  constructor(private bookService: BookService, private action$: Actions) {
+  }
 
   GetBooks$: Observable<Action> = createEffect(() =>
     this.action$.pipe(
@@ -17,10 +18,10 @@ export class BookEffects {
       mergeMap(() =>
         this.bookService.getAll().pipe(
           map((data: Book[]) => {
-            return BookActions.successGetAll({ books: data });
+            return BookActions.successGetAll({books: data});
           }),
           catchError((error: Error) => {
-            return of(BookActions.errorGetAll({ error: error }));
+            return of(BookActions.errorGetAll({error: error}));
           })
         )
       )
@@ -33,10 +34,10 @@ export class BookEffects {
       mergeMap(action =>
         this.bookService.add(action.book).pipe(
           map((data: Book) => {
-            return BookActions.successAddBook({ book: data });
+            return BookActions.successAddBook({book: data});
           }),
           catchError((error: Error) => {
-            return of(BookActions.errorAddBook({ error: error }));
+            return of(BookActions.errorAddBook({error: error}));
           })
         )
       )
