@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { Book } from '../book.model';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Actions, ofType } from '@ngrx/effects';
 import { first } from 'rxjs';
+import { Book } from '../book.model';
 import { BookActions } from '../book.actions';
 import { BookState } from '../book.state';
 

@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BookActions } from './modules/books/book.actions';
 import { BookState } from './modules/books/book.state';
-import { Actions, ofType } from '@ngrx/effects';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
